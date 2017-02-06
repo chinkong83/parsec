@@ -126,7 +126,10 @@ subprojects {
 def publishedProjects = subprojects.findAll()
 
 release {
-    buildTasks = ['releaseParsecGradlePlugin', 'releaseParsecBaseBuild', 'releaseParsecTemplatePlugin']
+    //buildTasks = ['releaseParsecGradlePlugin', 'releaseParsecBaseBuild', 'releaseParsecTemplatePlugin']
+    git {
+        requireBranch = ''
+    }
 }
 
 //Temporary tasks for a work around on task ordering with release plugin
