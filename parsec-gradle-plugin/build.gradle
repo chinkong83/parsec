@@ -40,10 +40,6 @@ pluginBundle {
     }
 }
 
-tasks.getByName('release').outputs.upToDateWhen {
-    parsecGradlePluginVersion.toString() > releasedVersion.toString()
-}
-
 task updateInstallationVersion << {
     def readme = new File("${projectDir}/README.md")
     def releaseVersion = rootProject.property("version")

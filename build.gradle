@@ -61,6 +61,12 @@ allprojects {
 
     beforeReleaseBuild.dependsOn preProcess
     afterReleaseBuild.dependsOn postProcess
+    release{
+        tagTemplate = '$name-$version'
+        git {
+            requireBranch = ''
+        }
+    }
 }
 
 
@@ -82,11 +88,6 @@ subprojects {
         testCompile group: 'junit', name: 'junit', version: '4.12'
         testCompile group: 'cglib', name: 'cglib-nodep', version: '2.2'
     }
-
-    release{
-        tagTemplate = '$name-$version'
-    }
-
 
     bintray {
         user = System.getenv('BINTRAY_USER')
@@ -124,10 +125,6 @@ subprojects {
 }
 
 def publishedProjects = subprojects.findAll()
-
-release {
-    buildTasks = ['releaseParsecGradlePlugin', 'releaseParsecBaseBuild', 'releaseParsecTemplatePlugin']
-}
 
 //Temporary tasks for a work around on task ordering with release plugin
 task releaseParsecGradlePlugin{ dependsOn('parsec-gradle-plugin:release') }
